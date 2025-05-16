@@ -6,10 +6,10 @@ Library    String
 Library    Collections
 Library    JSONLibrary
 Library    ../venv/Lib/site-packages/robot/libraries/XML.py
-Library    ../venv/Lib/site-packages/CSVLibrary/__init__.py
+#Library    ../venv/Lib/site-packages/CSVLibrary/__init__.py
 
 *** Variables ***
-${RESULT_FILE}     ../Results/ResultatJMX.jtl
+${RESULT_FILE}     ./Results/ResultatJMX.jtl
 ${DATA_FILE}    ../Resources/survey.csv
 
 

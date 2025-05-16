@@ -39,6 +39,7 @@ jobs:
             pip install robotframework-seleniumlibrary
             pip install robotframework-yamllibrary
             pip install robotframework-csvlib
+            pip install robotframework-excellibrary
             pip install robotframework-jsonlibrary
             pip install selenium
             wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
@@ -52,8 +53,8 @@ jobs:
         
       - name: Create results and report directories
         run: |
-          mkdir -p results
-          mkdir -p report
+          mkdir -p tests/results
+          mkdir -p tests/report
       
       - name: Set up JMeter
         run: |
@@ -62,7 +63,7 @@ jobs:
 
       - name: Run JMeter test
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t "tests/jmx/SurveyResponse_FNB.jmx" -l results/results.jtl -j results/jmeter.log
+          apache-jmeter-5.6.3/bin/jmeter -n -t "tests/jmx/SurveyResponse_FNB.jmx" -l tests/results/results.jtl -j tests/results/jmeter.log
 
       - name: Run Robot Framework tests
         run: |
@@ -70,23 +71,23 @@ jobs:
 
       - name: Generate HTML report
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -g results/results.jtl -o report
+          apache-jmeter-5.6.3/bin/jmeter -g tests/results/results.jtl -o report
 
       - name: List result files for debug
         run: |
           echo "=== JTL ==="
-          ls -lh results/
+          ls -lh tests/results/
           echo "=== Report ==="
-          ls -lh report/
+          ls -lh tests/report/
 
       - name: Upload JTL results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-jtl-results
-          path: results/results.jtl
+          path: tests/results/results.jtl
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-html-report
-          path: report
+          path: tests/report

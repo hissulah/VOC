@@ -10,7 +10,7 @@ Library    XML
 
 *** Variables ***
 ${RESULT_FILE}     ./tests/results/results.jtl
-${DATA_FILE}    ../Resources/survey.csv
+${DATA_FILE}    ./Resources/survey.csv
 
 
 *** Test Cases ***

@@ -52,8 +52,8 @@ jobs:
         
       - name: Create results and report directories
         run: |
-          mkdir -p tests/results
-          mkdir -p tests/report
+          mkdir -p results
+          mkdir -p report
       
       - name: Set up JMeter
         run: |
@@ -62,31 +62,31 @@ jobs:
 
       - name: Run JMeter test
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t "tests/jmx/SurveyResponse_FNB.jmx" -l tests/results/results.jtl -j tests/results/jmeter.log
+          apache-jmeter-5.6.3/bin/jmeter -n -t "tests/jmx/SurveyResponse_FNB.jmx" -l results.jtl -j jmeter.log
 
       - name: Run Robot Framework tests
         run: |
-            robot --outputdir tests/results tests/JM_FNB.robot
+            robot --outputdir results tests/JM_FNB.robot
 
       - name: Generate HTML report
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -g tests/results/results.jtl -o report
+          apache-jmeter-5.6.3/bin/jmeter -g results.jtl -o report
 
       - name: List result files for debug
         run: |
           echo "=== JTL ==="
-          ls -lh tests/results/
+          ls -lh results/
           echo "=== Report ==="
-          ls -lh tests/report/
+          ls -lh report/
 
       - name: Upload JTL results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-jtl-results
-          path: tests/results/results.jtl
+          path: results.jtl
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-html-report
-          path: tests/report
+          path: report

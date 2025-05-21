@@ -9,7 +9,7 @@ Library    JSONLibrary
 #Library    ../venv/Lib/site-packages/CSVLibrary/__init__.py
 
 *** Variables ***
-${RESULT_FILE}     ./Results/ResultatJMX.jtl
+${RESULT_FILE}    ResultatJMX.jtl
 ${DATA_FILE}    ../Resources/survey.csv
 
 

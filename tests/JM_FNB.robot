@@ -5,7 +5,7 @@ Library    OperatingSystem
 Library    String
 Library    Collections
 Library    JSONLibrary
-#Library    ../venv/Lib/site-packages/robot/libraries/XML.py
+Library    ../venv/Lib/site-packages/robot/libraries/XML.py
 #Library    ../venv/Lib/site-packages/CSVLibrary/__init__.py
 
 *** Variables ***

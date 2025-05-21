@@ -59,7 +59,13 @@ jobs:
 
       - name: Run JMeter test
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t tests/jmx/SurveyResponse_FNB.jmx -l results/results.jtl -j jmeter.log
+          apache-jmeter-5.6.3/bin/jmeter -n -t tests/jmx/SurveyResponse_FNB.jmx -l results/results.jtl -j jmeter.log \
+            -Jjmeter.save.saveservice.response_data=true \
+            -Jjmeter.save.saveservice.request_data=false \
+            -Jjmeter.save.saveservice.url=false \
+            -Jjmeter.save.saveservice.thread_counts=false \
+            -Jjmeter.save.saveservice.successful=false \
+            -Jjmeter.save.saveservice.failure_message=false
 
       - name: Check JTL file exists
         run: |

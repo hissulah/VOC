@@ -66,7 +66,7 @@ jobs:
 
       - name: Run Robot Framework tests
         run: |
-            robot --outputdir results tests/JM_FNB.robot
+            robot --outputdir tests/results tests/JM_FNB.robot
 
       - name: Generate HTML report
         run: |

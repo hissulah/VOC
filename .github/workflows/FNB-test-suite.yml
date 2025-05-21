@@ -70,7 +70,7 @@ jobs:
 
       - name: Run Robot Framework tests
         run: |
-          robot --outputdir results/results tests/JM_FNB.robot
+          robot --outputdir results tests/JM_FNB.robot
 
       - name: Generate JMeter HTML report
         run: |

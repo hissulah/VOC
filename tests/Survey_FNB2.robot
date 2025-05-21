@@ -18,7 +18,7 @@ Vérification de toutes les labels du VOC Survey FNB
     ${datayml}=    Load YAML    ${YAML_FILE}
 
     # Lire les données à partir du fichier CSV
-    @{datacsv}=    Read CSV File To List    ../Resources/survey.csv
+    @{datacsv}=    Read CSV File To List    ./Resources/survey.csv
 
     # Filtrer sur les données en fonction de la langue
     FOR    ${row}    IN    @{datacsv}

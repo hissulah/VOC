@@ -9,7 +9,7 @@ Library    YAMLLibrary.py
 *** Variables ***
 ${BROWSER}    Chrome
 ${BASE_URL}    https://mlbb--uat.sandbox.my.site.com/?surveyRes=
-${YAML_FILE}    ../Resources/FNB_translations.yaml
+${YAML_FILE}    ./Resources/FNB_translations.yaml
 
 *** Test Cases ***
 Vérification de toutes les labels du VOC Survey FNB

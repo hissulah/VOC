@@ -1,9 +1,8 @@
-name: Run JMeter tests
+name: Run JMeter and Robot Framework tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: '0 12 * * 5'  # Every Friday at 12am UTC
@@ -13,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Java
@@ -25,52 +24,51 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: '3.11'
+
+      - name: Install dependencies (Robot Framework + Selenium)
+        run: |
+          pip install robotframework robotframework-seleniumlibrary robotframework-yamllibrary robotframework-csvlib robotframework-jsonlibrary selenium
+          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg2
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Download and extract JMeter
         run: |
           wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
           tar -xzf apache-jmeter-5.6.3.tgz
 
-
-      - name: Install Robot Framework + Selenium
-        run: |
-            pip install robotframework
-            pip install robotframework-seleniumlibrary
-            pip install robotframework-yamllibrary
-            pip install robotframework-csvlib
-            pip install robotframework-jsonlibrary
-            pip install selenium
-            wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-            unzip chromedriver_linux64.zip
-            sudo mv chromedriver /usr/local/bin/
-
-      - name: Install Chrome (for Selenium)
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y google-chrome-stable
-        
       - name: Create results and report directories
         run: |
-          mkdir -p results
-          mkdir -p report
-      
-      - name: Set up JMeter
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y jmeter
+          mkdir -p results report
 
       - name: Run JMeter test
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t "tests/jmx/SurveyResponse_FNB.jmx" -l results.jtl -j jmeter.log
+          apache-jmeter-5.6.3/bin/jmeter -n -t tests/jmx/SurveyResponse_FNB.jmx -l results/results.jtl -j jmeter.log
+
+      - name: Check JTL file exists
+        run: |
+          if [ ! -f results/results.jtl ]; then
+            echo "results/results.jtl not found!"
+            exit 1
+          fi
 
       - name: Run Robot Framework tests
         run: |
-            robot --outputdir results tests/JM_FNB.robot
+          robot --outputdir results/results tests/JM_FNB.robot
 
-      - name: Generate HTML report
+      - name: Generate JMeter HTML report
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -g results.jtl -o report
+          apache-jmeter-5.6.3/bin/jmeter -g results/results.jtl -o report
 
       - name: List result files for debug
         run: |
@@ -83,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-jtl-results
-          path: results.jtl
+          path: results/results.jtl
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4

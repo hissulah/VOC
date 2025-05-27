@@ -9,14 +9,17 @@ Library    XML
 #Library    ../venv/Lib/site-packages/CSVLibrary/__init__.py
 
 *** Variables ***
-${RESULT_FILE}     ./results/results.jtl
+${JMETTER_PATH}    apache-jmeter-5.6.3/bin/jmeter
+${JMX_FILE}        tests/jmx/SurveyResponse_FNB.jmx
+${RESULT_FILE}     results/results.jtl
+
 ${DATA_FILE}    ./Resources/survey.csv
 
 
 *** Test Cases ***
 Exécuter JMeter et Extraire IdSurvey
     # Lancement JMeter
-    #Run Process    ${JMETTER_PATH}    -n    -t    ${JMX_FILE}    -l    ${RESULT_FILE}
+    Run Process    ${JMETTER_PATH}    -n    -t    ${JMX_FILE}    -l    ${RESULT_FILE}
     File Should Exist    ${RESULT_FILE}
 
     ${content}=    Get File    ${RESULT_FILE}
@@ -78,5 +81,4 @@ Append Survey Data
     Log To Console    ${data}
 
     Create File    ${file}    ${data}
-
-
+    

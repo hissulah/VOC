@@ -57,15 +57,9 @@ jobs:
         run: |
           mkdir -p results report
 
-      - name: Run JMeter test
+      - name: Run Robot Framework tests
         run: |
-          apache-jmeter-5.6.3/bin/jmeter -n -t tests/jmx/SurveyResponse_FNB.jmx -l results/results.jtl -j jmeter.log \
-            -Jjmeter.save.saveservice.response_data=true \
-            -Jjmeter.save.saveservice.request_data=false \
-            -Jjmeter.save.saveservice.url=false \
-            -Jjmeter.save.saveservice.thread_counts=false \
-            -Jjmeter.save.saveservice.successful=false \
-            -Jjmeter.save.saveservice.failure_message=false
+          robot --outputdir results tests/JM_FNB.robot
 
       - name: Check JTL file exists
         run: |
@@ -73,10 +67,6 @@ jobs:
             echo "results/results.jtl not found!"
             exit 1
           fi
-
-      - name: Run Robot Framework tests
-        run: |
-          robot --outputdir results tests/JM_FNB.robot
 
       - name: Generate JMeter HTML report
         run: |

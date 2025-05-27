@@ -1,0 +1,8 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1748268499981,909,000 - LOGIN ADMIN UAT,200,OK,00 - PROFILS AUTHENTICATION 1-1,text,true,,1319,526,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/oauth2/token,902,0,642
+1748268501972,1888,100 - SURVEY - ACCOUNT CREATION,200,OK,01 - SURVEY FNB Post Purchase 2-1,text,true,,1630,2039,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/composite,1887,0,163
+1748268563864,1126,101 - SURVEY - UPDATE OPTIN EMAIL,204,No Content,01 - SURVEY FNB Post Purchase 2-1,,true,,875,526,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/sobjects/account/001bd00000CnlRzAAJ,0,0,157
+1748268567992,685,102 - SURVEY - ADD TRANSACTION,200,OK,01 - SURVEY FNB Post Purchase 2-1,text,true,,1623,2319,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/composite,685,0,0
+1748268571683,1091,103 - SURVEY - TRANSACTION LINE BATCH,200,OK,01 - SURVEY FNB Post Purchase 2-1,text,true,,1190,459,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/actions/custom/flow/Loyalty_Run_TransactionLine_Batch,1091,0,0
+1748268602793,189,104 - SURVEY - BATCH FNB,200,OK,01 - SURVEY FNB Post Purchase 2-1,text,true,,1075,435,1,1,"https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/tooling/executeAnonymous/?anonymousBody=Database.executeBatch(new%20CCC_SRpostPurchaseFNBCreationBatch(),200);",189,0,0
+1748268682989,991,105 - SURVEY - GET SURVEY,200,OK,01 - SURVEY FNB Post Purchase 2-1,text,true,,1806,781,1,1,https://mlbb--uat.sandbox.my.salesforce.com/services/data/v60.0/composite,991,0,700

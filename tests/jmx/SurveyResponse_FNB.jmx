@@ -851,7 +851,7 @@
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract TransactionLineId" enabled="true">
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract TransactionLineId">
             <stringProp name="JSONPostProcessor.referenceNames">IdTransactionLine</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$.compositeResponse[1].body.id</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
@@ -862,7 +862,7 @@
           </ConstantTimer>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="105 - SURVEY - GET SURVEY" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="105 - SURVEY - GET SURVEY">
           <stringProp name="HTTPSampler.domain">${URL}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">services/data/v${API_VERSION}/composite</stringProp>
@@ -938,7 +938,7 @@
             <assertionsResultsToSave>0</assertionsResultsToSave>
           </value>
         </objProp>
-        <stringProp name="filename"></stringProp>
+        <stringProp name="filename">.\results\results.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
